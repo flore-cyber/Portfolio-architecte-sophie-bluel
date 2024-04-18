@@ -11,7 +11,7 @@ Une fois les dépendances installées lancez le projet avec la commande `npm sta
 Compte de test pour Sophie Bluel
 
 ```
-email: sophie.bluel@test.tld
+email: sophie.bluel@test.tlds
 
 password: S0phie 
 ```
