@@ -50,9 +50,17 @@ const filtres = document.querySelector(".filtres")
 
     });
 }
+function filtreCategories(){
+    const buttons = document.querySelectorAll(".filtres button");
+    buttons.forEach((button) =>{
+        button.addEventListener("click", (e) => {
+      console.log(e.target.id)
+    });
+ });
+}
 
 
-
+filtreCategories();
 displayCategories();
 getCategories();
 getWorks();
