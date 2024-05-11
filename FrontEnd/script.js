@@ -61,6 +61,5 @@ function filtreCategories(){
 
 
 filtreCategories();
-displayCategories();
 getCategories();
 getWorks();
