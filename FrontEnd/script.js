@@ -38,28 +38,37 @@ gallery.innerHTML = medias.map ( media => `
         console.log(error)
     })
 }
+
+function createElement(){
+const btn = document.createElement('button');
+    const  t = document.createTextNode("Tous");
+    btn.appendChild(t);
+    filtres.appendChild(btn);
+
+
+}
+
 const filtres = document.querySelector(".filtres")
 
  async function displayCategories (categories){
     console.log(categories)
+    createElement();
     categories.forEach((categorie) => {
         const btn = document.createElement("button");
         btn.textContent = categorie.name;
         btn.id = categorie.id;
-        filtres.appendChild(btn)
-
-    });
+        filtres.appendChild(btn);
+        filtreCategories();
+ });
 }
-function filtreCategories(){
+    async function filtreCategories(){
     const buttons = document.querySelectorAll(".filtres button");
+    console.log(buttons);
     buttons.forEach((button) =>{
         button.addEventListener("click", (e) => {
       console.log(e.target.id)
     });
- });
-}
-
-
-filtreCategories();
+});
+    }
 getCategories();
 getWorks();
