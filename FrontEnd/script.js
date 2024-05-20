@@ -3,17 +3,18 @@ const API_BASE_URL = "http://localhost:5678/api"
                      //FETCH POUR RECUPERER LES WORKS//
 
  function getWorks(){
-fetch (`${API_BASE_URL}/works`)
+ return fetch (`${API_BASE_URL}/works`)
 .then(response => response.json ())
 .then(data => {
     displayWorks (data)
     console.table(data)
+    return data;
 })
 .catch(error => {
     console.log(error)
 });
 }
-getWorks();
+
 // Affichage des Works //
  function displayWorks(medias){
 const gallery = document.querySelector('.gallery')
@@ -28,7 +29,7 @@ gallery.innerHTML = medias.map ( media => `
                        // FETCH POUR RECUPERER LES CATEGORIES //
 
     function getCategories(){
-        fetch (`${API_BASE_URL}/categories`)
+      return  fetch (`${API_BASE_URL}/categories`)
         .then(reponse => reponse.json())
         .then (data => {
             console.table(data)
@@ -40,45 +41,34 @@ gallery.innerHTML = medias.map ( media => `
 }
                        // CREATION BUTTON TOUS //
 
-function createBtn() {
-const btn = document.createElement('button');
-    const  t = document.createTextNode("Tous");
-    btn.appendChild(t);
-    filtres.appendChild(btn);
-
-
-}
 
 const filtres = document.querySelector(".filtres")
 
  async function displayCategories (categories){
-    console.log(categories)
-    createBtn();
+    const btnAll = document.createElement('button');
+    btnAll.textContent = 'Tous'
+    btnAll.addEventListener('click',() => {
+        getWorks().then(displayWorks)
+    })
+filtres.appendChild(btnAll)
+
     categories.forEach((categorie) => {
         const btn = document.createElement("button");
         btn.textContent = categorie.name;
         btn.id = categorie.id;
+        console.log(categorie.id)
         filtres.appendChild(btn);
-        filtreCategories();
+    
+        btn.addEventListener('click', function(){
+            getWorks().then(data => {
+                const filteredWorks = filterWorksByCategory(categorie.id,data);
+                displayWorks(filteredWorks)
+            })
+        })
     });
 } 
-   async function filtreCategories(){
-    const buttons = document.querySelectorAll(".filtres button");
-    const gallery = document.querySelector(".gallery");
-    buttons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-    btnId = e.target.id;
-    gallery.innerHTML = "";
-    if( btnId !=="0"){
-     const triworks = getWorks.filter((work)=>{
-        return work.categorieId == btnId;
-     }
-    )
-
-    }
-    console.log(btnId);
-    });
-    });
+function filterWorksByCategory(categoryId, works){
+    return works.filter(work => work.categoryId === categoryId);
 }
-getWorks();
+getWorks().then(displayWorks);
 getCategories();
