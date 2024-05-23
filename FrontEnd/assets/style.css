@@ -200,3 +200,26 @@ footer nav ul {
 	margin: 2em
 }
 
+.filtres {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 25px;
+}
+
+.filtres button {
+	color: #1D6154;
+	border: 2px solid #1D6154;
+	border-radius: 60px;
+	background-color: white;
+	font-size: 16px;
+	font-weight: 700;
+	padding: 5px;
+	margin: 0 10px;
+	font-family: 'Syne';
+}
+
+
+.filtes .active {
+	background-color: #1D6154;
+	color: white;
+}
